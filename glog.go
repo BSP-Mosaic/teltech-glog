@@ -643,6 +643,9 @@ func (l *loggingT) output(s severity, buf *buffer) {
 			buf.Write(stacks(false))
 		}
 	}
+	if s >= errorLog {
+		buf.Write(stacks(false))
+	}
 	data := buf.Bytes()
 	if l.toStderr {
 		os.Stderr.Write(data)
