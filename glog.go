@@ -789,6 +789,8 @@ func (sb *syncBuffer) rotateFile(now time.Time) error {
 	if sb.file != nil {
 		sb.Flush()
 		sb.file.Close()
+		// Delete old rotated file
+		os.Remove(sb.file.Name()) // ignore err
 	}
 	var err error
 	sb.file, _, err = create(severityName[sb.sev], now)
